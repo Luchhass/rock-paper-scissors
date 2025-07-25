@@ -5,11 +5,14 @@
 }
 
 body {
-  font-family: Barlow Semi Condensed;
+  font-family: 'Barlow Semi Condensed', sans-serif;
   background-color: #1F3757;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -17,22 +20,35 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 100vh;
+  max-width: 1200px;
+  padding: 0 20px;
+  justify-content: space-between;
+  position: relative;
 }
 
 .scoreboard-container {
-  margin-bottom: 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 2px solid #fff;
   border-radius: 16px;
-  padding: 20px;
-  width: 700px;
-  margin-top: 50px;
+  padding: 15px 25px;
+  width: 100%;
+  max-width: 700px;
+  margin-top: 30px;
+  flex-shrink: 0;
 }
 
 .scoreboard-text {
   color: white;
+}
+
+.scoreboard-text h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 2px;
 }
 
 .scoreboard {
@@ -40,36 +56,44 @@ body {
   border: 1px solid #fff;
   text-align: center;
   width: 150px;
-  padding: 16px;
-  max-height: 114px;
+  padding: 12px 16px;
   border-radius: 10px;
 }
 
 .scoreboard p {
-  color: blue;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
 }
 
 .scoreboard h3 {
-  font-size: 50px;
-  color: grey;
+  font-size: 45px;
+  color: #64748b;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .game {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-grow: 1;
+  width: 100%;
 }
 
-.game.hidden{
+.game.hidden {
   display: none;
 }
 
-.rockdiv {
+.gamebuttons {
   display: flex;
-  justify-content: center;
-  gap: 70px;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
 }
-
 
 .gamebuttons-item {
   border: none;
@@ -78,12 +102,21 @@ body {
   justify-content: center;
 }
 
-.gamebuttons button{
+.rockdiv {
+  display: flex;
+  justify-content: center;
+}
+
+.gamebuttons button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
 .gamebuttons img {
+  width: 100px;
+  height: 100px;
   transition: transform 0.3s;
 }
 
@@ -95,44 +128,66 @@ body {
   transform: scale(1.1);
 }
 
-.rulesbutton button {
-  position: relative;
-  cursor: pointer;
-  border: 1px solid #ffff;
-  background-color: transparent;
-  color: #fff;
-  bottom: -100px;
-  right: -600px;
-  padding: 10px 30px;
-  border-radius: 8px;
-}
-
-
 .game-pick {
   display: none;
-  gap: 100px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  flex-grow: 1;
+  padding: 20px 0;
 }
 
-.game-pick.active{
+.game-pick.active {
   display: flex;
 }
 
+.you-picked,
+.house-picked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
 .game-pick h1 {
-  font-size: 20px;
+  font-size: 18px;
   color: white;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.game-pick p {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-pick img {
+  width: 70px;
+  height: 70px;
 }
 
 .winscreen {
-  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
 }
 
 .winscreen h2 {
-  font-size: 40px;
+  font-size: 48px;
   color: white;
   text-align: center;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .playagain {
@@ -140,15 +195,14 @@ body {
   font-weight: 600;
   line-height: 19.2px;
   letter-spacing: 2.5px;
-  text-align: left;
-
+  text-align: center;
   color: #3B4262;
   border: 1px solid #ffff;
   background-color: #F3F3F3;
   text-decoration: none;
   border-radius: 10px;
   padding: 15px 60px;
-
+  transition: all 0.3s ease;
 }
 
 .playagain:hover {
@@ -156,174 +210,528 @@ body {
   color: #F3F3F3;
 }
 
-.game-pick p {
-  width: 224px;
-  height: 224px;
-  border-radius: 50%;
-  background-color: #0000001A;
-
+.rulesbutton {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
 }
 
-.winscreen p {
-  width: 224px;
-  height: 224px;
-  border-radius: 50%;
-  background-color: #0000001A;
-
+.rulesbutton button {
+  cursor: pointer;
+  border: 1px solid #ffff;
+  background-color: transparent;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
 }
 
-@media (width < 376px) {
+.rulesbutton button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
+/* Mobile First Responsive Design */
 
-
+/* Extra Small Mobile (max 375px) */
+@media (max-width: 375px) {
   .container {
-    width: 375px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    padding: 0 15px;
+    height: 100vh;
+    justify-content: space-evenly;
   }
 
   .scoreboard-container {
-    width: 376px;
-    margin-bottom: 7%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 2px solid #fff;
-    border-radius: 16px;
-    gap: 113px;
-    margin-bottom: 105px;
+    width: 100%;
+    max-width: 340px;
+    padding: 12px 20px;
+    margin-top: 20px;
   }
 
-  .scoreboard-text {
-    color: white;
+  .scoreboard-text h2 {
+    font-size: 18px;
+    line-height: 1.1;
   }
 
   .scoreboard {
-    background-color: white;
-    border: 1px solid #fff;
-    text-align: center;
-    width: 150px;
-    padding: 16px;
-    max-height: 114px;
-    border-radius: 10px;
+    width: 120px;
+    padding: 10px 12px;
   }
 
   .scoreboard p {
-    color: blue;
+    font-size: 12px;
+  }
+
+  .scoreboard h3 {
+    font-size: 35px;
+  }
+
+  .gamebuttons {
+    gap: 35px;
+  }
+
+  .gamebuttons-item {
+    gap: 35px;
+  }
+
+  .gamebuttons img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .game-pick {
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px 0;
+  }
+
+  .game-pick h1 {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .game-pick p {
+    width: 140px;
+    height: 140px;
+  }
+
+  .game-pick img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .winscreen {
+    order: -1;
+  }
+
+  .winscreen h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .playagain {
+    padding: 12px 40px;
+    font-size: 14px;
+  }
+
+  .rulesbutton {
+    position: static;
+    margin-top: 20px;
+  }
+
+  .rulesbutton button {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile (376px - 575px) */
+@media (min-width: 376px) and (max-width: 575px) {
+  .container {
+    padding: 0 20px;
+    justify-content: space-evenly;
+  }
+
+  .scoreboard-container {
+    margin-top: 25px;
+    padding: 15px 22px;
+  }
+
+  .scoreboard-text h2 {
+    font-size: 20px;
+  }
+
+  .scoreboard {
+    width: 130px;
+    padding: 12px 14px;
+  }
+
+  .scoreboard h3 {
+    font-size: 40px;
+  }
+
+  .gamebuttons {
+    gap: 40px;
+  }
+
+  .gamebuttons-item {
+    gap: 40px;
+  }
+
+  .gamebuttons img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .game-pick {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .you-picked,
+  .house-picked {
+    flex: 0 0 45%;
+  }
+
+  .winscreen {
+    flex: 0 0 100%;
+    order: 1;
+  }
+
+  .game-pick h1 {
+    font-size: 17px;
+    margin-bottom: 30px;
+  }
+
+  .game-pick p {
+    width: 150px;
+    height: 150px;
+  }
+
+  .game-pick img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .winscreen h2 {
+    font-size: 36px;
+  }
+
+  .rulesbutton {
+    bottom: 25px;
+    right: 25px;
+  }
+}
+
+/* Medium Mobile/Small Tablet (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .container {
+    justify-content: space-between;
+    padding: 0 25px;
+  }
+
+  .scoreboard-container {
+    margin-top: 30px;
+    padding: 18px 28px;
+  }
+
+  .scoreboard-text h2 {
+    font-size: 22px;
+  }
+
+  .scoreboard {
+    width: 140px;
+    padding: 14px 16px;
+  }
+
+  .gamebuttons {
+    gap: 45px;
+  }
+
+  .gamebuttons-item {
+    gap: 55px;
+  }
+
+  .gamebuttons img {
+    width: 95px;
+    height: 95px;
+  }
+
+  .game-pick {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+  }
+
+  .you-picked,
+  .house-picked {
+    flex: 0 0 40%;
+  }
+
+  .winscreen {
+    flex: 0 0 100%;
+    order: 1;
+    margin-top: 20px;
+  }
+
+  .game-pick p {
+    width: 160px;
+    height: 160px;
+  }
+
+  .game-pick img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .winscreen h2 {
+    font-size: 42px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 30px;
+  }
+
+  .scoreboard-container {
+    margin-top: 35px;
+    padding: 20px 30px;
+  }
+
+  .scoreboard-text h2 {
+    font-size: 26px;
+  }
+
+  .scoreboard {
+    width: 160px;
+    padding: 16px 18px;
   }
 
   .scoreboard h3 {
     font-size: 50px;
-    color: grey;
   }
 
-  .game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .gamebuttons {
+    gap: 55px;
   }
 
-  .gamebuttons img{
-    width: 150px;
-  }
-
-  .gamebuttons-items {
-    display: flex;
-    justify-content: center;
+  .gamebuttons-item {
     gap: 70px;
   }
 
-
-  .gamebuttons-item {
-    gap: 50px;
-    display: flex;
-    justify-content: center;
-  }
-
   .gamebuttons img {
-    transition: transform 0.3s;
+    width: 110px;
+    height: 110px;
   }
-
-  .gamebuttons a:hover {
-    transform: scale(1.1);
-  }
-
-  .gamebuttons a:hover img {
-    transform: scale(1.1);
-  }
-
-  .rulesbutton button {
-    position: relative;
-    cursor: pointer;
-    border: 1px solid #ffff;
-    background-color: transparent;
-    color: #fff;
-    bottom: -70px;
-    right: 0px;
-    padding: 10px 30px;
-    border-radius: 8px;
-    
-  }
-
 
   .game-pick {
-    display: flex;
-    gap: 100px;
+    max-width: 800px;
+    gap: 40px;
   }
 
   .game-pick h1 {
     font-size: 20px;
-    color: white;
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .winscreen {
-    margin-top: 150px;
-  }
-
-  .winscreen h2 {
-    font-size: 40px;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .playagain {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 19.2px;
-    letter-spacing: 2.5px;
-    text-align: left;
-
-    color: #3B4262;
-    border: 1px solid #ffff;
-    background-color: #F3F3F3;
-    text-decoration: none;
-    border-radius: 10px;
-    padding: 15px 60px;
-
-  }
-
-  .playagain:hover {
-    background-color: #3B4262;
-    color: #F3F3F3;
+    margin-bottom: 45px;
   }
 
   .game-pick p {
-    width: 224px;
-    height: 224px;
-    border-radius: 50%;
-    background-color: #0000001A;
-
+    width: 200px;
+    height: 200px;
   }
 
-  .winscreen p {
-    width: 224px;
-    height: 224px;
-    border-radius: 50%;
-    background-color: #0000001A
+  .game-pick img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .winscreen h2 {
+    font-size: 52px;
+  }
+
+  .rulesbutton {
+    bottom: 35px;
+    right: 35px;
+  }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .container {
+    padding: 0 40px;
+  }
+
+  .scoreboard-container {
+    margin-top: 40px;
+    padding: 22px 35px;
+  }
+
+  .scoreboard-text h2 {
+    font-size: 28px;
+  }
+
+  .scoreboard {
+    width: 170px;
+    padding: 18px 20px;
+  }
+
+  .scoreboard h3 {
+    font-size: 55px;
+  }
+
+  .gamebuttons {
+    gap: 60px;
+  }
+
+  .gamebuttons-item {
+    gap: 80px;
+  }
+
+  .gamebuttons img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .game-pick {
+    max-width: 950px;
+    gap: 50px;
+  }
+
+  .game-pick h1 {
+    font-size: 22px;
+    margin-bottom: 50px;
+  }
+
+  .game-pick p {
+    width: 220px;
+    height: 220px;
+  }
+
+  .game-pick img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .winscreen h2 {
+    font-size: 58px;
+    margin-bottom: 25px;
+  }
+
+  .playagain {
+    padding: 18px 70px;
+    font-size: 17px;
+  }
+
+  .rulesbutton {
+    bottom: 40px;
+    right: 40px;
+  }
+
+  .rulesbutton button {
+    padding: 12px 35px;
+    font-size: 17px;
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .container {
+    padding: 0 50px;
+  }
+
+  .scoreboard-container {
+    margin-top: 50px;
+    padding: 25px 40px;
+    max-width: 800px;
+  }
+
+  .scoreboard-text h2 {
+    font-size: 30px;
+  }
+
+  .scoreboard {
+    width: 180px;
+    padding: 20px 22px;
+  }
+
+  .scoreboard h3 {
+    font-size: 60px;
+  }
+
+  .gamebuttons {
+    gap: 70px;
+  }
+
+  .gamebuttons-item {
+    gap: 100px;
+  }
+
+  .gamebuttons img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .game-pick {
+    max-width: 1100px;
+    gap: 60px;
+  }
+
+  .game-pick h1 {
+    font-size: 24px;
+    margin-bottom: 55px;
+  }
+
+  .game-pick p {
+    width: 240px;
+    height: 240px;
+  }
+
+  .game-pick img {
+    width: 95px;
+    height: 95px;
+  }
+
+  .winscreen h2 {
+    font-size: 64px;
+    margin-bottom: 30px;
+  }
+
+  .playagain {
+    padding: 20px 80px;
+    font-size: 18px;
+  }
+
+  .rulesbutton {
+    bottom: 50px;
+    right: 50px;
+  }
+
+  .rulesbutton button {
+    padding: 14px 40px;
+    font-size: 18px;
+  }
+}
+
+/* Very Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .scoreboard-container {
+    margin-top: 60px;
+    max-width: 900px;
+  }
+
+  .gamebuttons {
+    gap: 80px;
+  }
+
+  .gamebuttons-item {
+    gap: 120px;
+  }
+
+  .gamebuttons img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .game-pick {
+    max-width: 1300px;
+    gap: 80px;
+  }
+
+  .game-pick p {
+    width: 260px;
+    height: 260px;
+  }
+
+  .game-pick img {
+    width: 105px;
+    height: 105px;
+  }
+
+  .winscreen h2 {
+    font-size: 72px;
   }
 }
